@@ -1,0 +1,49 @@
+1) SELECT *FROM role ORDER BY name;
+
+2) SELECT *FROM skill ORDER BY name;
+
+3) SELECT *FROM department ORDER BY name DESC;
+
+4) SELECT *FROM post_type ORDER BY name DESC;
+
+5) SELECT name FROM role ORDER BY name;
+
+6) SELECT name,description FROM skill ORDER BY name;
+
+7) SELECT name FROM department ORDER BY name;
+
+8) SELECT name FROM post_type ORDER BY name;
+
+9) SELECT DISTINCT university_name FROM higher_degree ORDER BY university_name;
+
+10) SELECT DISTINCT designation FROM profile ORDER BY designation;
+
+11) SELECT DISTINCT batch FROM profile,experience WHERE designation='PROJECT MANAGER' AND current=1 ORDER BY batch;
+
+12) SELECT DISTINCT designation FROM profile WHERE gender='MALE' ORDER BY designation;
+
+13) SELECT DISTINCT designation FROM profile WHERE batch=2008 AND gender='FEMALE' ORDER BY designation;
+
+14) SELECT address FROM profile WHERE gender='MALE' AND batch=2008 ORDER BY address;
+
+15) SELECT DISTINCT company_name FROM experience ORDER BY company_name;
+
+16) SELECT DISTINCT company_name FROM experience WHERE current=1 ORDER BY company_name DESC;
+
+17) SELECT name,phonenumber FROM user ORDER BY name DESC;
+
+18) SELECT name,emailid,phonenumber FROM user ORDER BY name;
+
+19) SELECT username,password FROM user WHERE name='RAM';
+
+20) SELECT name,short_description FROM project WHERE number_of_members>10 ORDER BY name;
+
+21) SELECT name,description FROM event WHERE date>'2014-01-27' ORDER BY name;
+
+22) SELECT content FROM post ORDER BY date DESC;
+
+23) SELECT content FROM post WHERE date>'2014-01' ORDER BY date DESC;
+
+24) SELECT content FROM query WHERE YEAR(date)='2013' ORDER BY date DESC;
+
+25) SELECT name FROM event WHERE date='2014-01-27 15:00:00.0' ORDER BY name;

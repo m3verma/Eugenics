@@ -1,0 +1,31 @@
+1) select name,length(name) as length from user order by name;
+
+2) Select name From user Where length(name) IN (Select max(length(name )) From user );
+
+3) Select name From user Where length(password)<3 order by name;
+
+4) SELECT name,LEFT(name,2) as start_2_chars from user order by name;
+
+5) SELECT name,RIGHT(name,2) as last_2_chars from user order by name;
+
+6) SELECT LOWER(name) as lower_case from user order by name;
+
+7) SELECT UPPER(name) as upper_case from user order by name;
+
+8) SELECT LPAD(name,30,'?') as modified_name from user order by name;
+
+9) SELECT RPAD(name,30,'?') as modified_name from user order by name;
+
+10) SELECT name,LTRIM(name) as modified_name from user order by name;
+
+11) SELECT name,RTRIM(name) as modified_name from user order by name;
+
+12) SELECT name,RTRIM(LTRIM(name)) as modified_name from user order by name;
+
+13) SELECT name from user WHERE name LIKE 'a%a';
+
+14) SELECT name from user WHERE name LIKE '%aa' ORDER BY name;
+
+15) SELECT name from user WHERE name LIKE '%aa%' ORDER BY name;
+
+16) SELECT name from user WHERE name LIKE 'P%' AND LENGTH(name)=6 ORDER BY name;

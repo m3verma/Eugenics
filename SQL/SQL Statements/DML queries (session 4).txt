@@ -1,0 +1,49 @@
+1.	select count(*) as role_count from role;
+
+2.	select count(*) as skill_count from skill;
+
+3.	select count(*)as user_count from user where profile_id is null;
+
+4.	select count(*)as alumni_2008_count from profile where batch=2008;
+
+5.	select count(*)as alumni_male_2008_count from profile where batch=2008 and gender='male';
+
+6.	SELECT batch, COUNT(*) as alumni_count FROM profile GROUP BY batch order by batch;
+
+7.	SELECT batch, COUNT(*) as male_alumni_count FROM profile where gender='male' GROUP BY batch  order by batch;
+
+8.	SELECT batch, COUNT(*) as female_alumni_count FROM profile where gender='female' GROUP BY batch  order by batch;
+
+9.	SELECT count( DISTINCT(designation) ) as designation_count FROM profile
+
+10.	SELECT count(*) as PM_count FROM profile where designation='project manager';
+
+11.	select min(batch) as Senior_PM_Batch from profile where designation='project manager';
+
+12.	select max(batch) as Junior_PM_Batch from profile where designation='project manager';
+
+13.	SELECT designation, COUNT(*) as designation_count FROM profile GROUP BY designation order by designation;
+
+14.	select count(company_name) as company_count from experience where end is null;
+
+15.	SELECT company_name, COUNT(*) as alumni_count FROM experience where end is null GROUP BY company_name;
+
+16.	select count(distinct(name)) as project_count from project where number_of_members >10;
+
+17.	select count(distinct(name)) as number_of_events from event where year(date)='2013';
+
+18.	SELECT year(date), COUNT(name) as number_of_events FROM event GROUP BY year(date) order by year(date);
+
+19.	select count(*)as number_of_posts from post where date>'2014-01';
+
+20.	select count(*) as number_of_queries from query where time(date)>='01:00:00' and time(date)<='05:00:00';
+
+21.	select count(*) number_of_events from event where date>='2014-01-27';
+
+22.	select count(*) as number_of_posts from post where date< '2013-12-01';
+
+23.	select count(*) as number_of_posts from post where date> '2013-12-01';
+
+24.	SELECT year(date), COUNT(*) as number_of_events FROM event GROUP BY year(date) order by year(date);
+
+25.	SELECT DATE_FORMAT(date,'%M') 'month_name',count(*) 'number_of_events' FROM event WHERE year(date)='2013' group by DATE_FORMAT(date,'%M') ORDER BY date;

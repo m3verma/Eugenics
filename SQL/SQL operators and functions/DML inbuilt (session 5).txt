@@ -1,0 +1,19 @@
+1) select abs(2);
+
+2) select abs(-32) as absolute;
+
+3) select ceiling(1.23) as int_value;
+
+4) select ceil(-1.23) as int_value;
+
+5) select conv('f',16,2) as base2;
+
+6) select floor(1.23) as int_value;
+
+7) select floor(-1.23) as int_value;
+
+8) select round(1.298,1) as round_value;
+
+9) select weekday('2014-03-01') as weekday_index;
+
+10) select dayname('2014-03-01') as weekday_name;
