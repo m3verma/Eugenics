@@ -1,0 +1,61 @@
+1)insert into role (id,name) values (3004,'abcd'),(3003,'efgh');
+
+2)insert into skill (id,description,name) values (3004,'btechcse','abcd'),(3005,'btechcse','efgh');
+
+3)insert into post_type (id,name) values (3004,'abcd'),(3003,'efgh');
+
+4)insert into department(id,name) values (3004,'abcd'),(3003,'efgh');
+
+5)insert into degree (id,department_id,name) values (3004,3004,'abcd'),(3003,3003,'efgh');
+
+6)insert into profile(id,address,batch,degree_id,designation,gender) values (3004,'abcd','project',004,'student','male'), (3003,'efgh','project',003,'student','male');
+
+7)insert into higher_degree(id,degree_name,university_name,profile_id) values (3004,'btech','dit',004),(3003,'btech','dit',003);
+
+8)insert into experience(id,company_name,current,end,start,profile_id)
+values(1,'CTS',1,'2008-11-11 13:23:44','2015-11-11 13:23:44',017),
+(2,'CTS',1,'2008-11-11 13:23:44','2015-11-11 13:23:44',016);
+
+9)insert into project(id,name,number_of_members,profile_id,short_description)
+values(1,'Alumini management',10,017,'for school and college'),
+(2,'Library management',11,016,'for school and college');
+
+10)insert into user(id,emailid,name,password,phonenumber,profile_id,role_id,username)
+values(1,'abcd@gmail.com','abcd','efgh',9876543210,017,46,'abcdefgh'),
+(2,'ijkl@mnop.com','ijkl','mnop',9867543210,016,47,'ijklmnop');
+
+11)insert into query(id,content,date,parent_id,user_id)
+values(1,'Alumini management','2008-11-11 13:23:44',78,45),
+(2,'Library management','2008-11-11 13:23:44',79,46);
+
+12)insert into event(id,date,description,invitation,name,organiser_id)
+values(1,'2008-11-11 13:23:44','Alumni meet','OBA','abcd',123),
+(2,'2008-11-11 13:23:44','Library opening','member','efgh',456);
+
+13)insert into post(id,content,date,type_id,user_id)
+values(1,'Alumni meet','2008-11-11 13:23:44',789,123),
+(2,'Library opening','2008-11-11 13:23:44',987,456);
+
+14)update role set name='Administrator' where name='Admin';
+
+15)delete from role where name='Student';
+
+16)update skill set name='CADCAM' where name='CAD';
+
+17)delete from skill where name='Web Design';
+
+18)update post_type set name='Technology' where name='Tech';
+
+19)delete from post_type where name='Technology';
+
+20)update profile set batch='1998' where batch='98';
+
+21)update query SET date=DATE_FORMAT(date,'2013-%m-%d');
+
+22)update query set date=date_add(date,interval 1 day) where date(date)='2013-01-31';
+
+23) delete from query where date between date_format(date,'0000-%m-%d') and date_format(date,'2011-%m-%d');
+
+24)delete from experience where end is not null;
+
+25)update event set date=date_add(date,interval 3 hour) where name='ALUMNI MEET';
