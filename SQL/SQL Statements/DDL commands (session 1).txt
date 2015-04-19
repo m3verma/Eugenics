@@ -1,0 +1,151 @@
+1.create table role
+(
+  Id BIGINT(20), 
+  name varchar(255) NOT NULL,
+  primary key(Id)
+);
+
+2.create table skill
+(
+  Id BIGINT(20)primary key, 
+  description varchar(255) NULL, 
+  name varchar(255) NOT NULL
+);
+
+3.create table post_type
+(
+  Id BIGINT(20)primary key,
+  name varchar(255) NOT NULL
+);
+
+4.create table department
+(
+  Id BIGINT(20)primary key, 
+  name varchar(255) NOT NULL
+);
+
+5.create table degree
+(
+  Id BIGINT(20)primary key, 
+  department_id BIGINT(20) NOT NULL,
+  name varchar(255) NOT NULL,
+  FOREIGN KEY(department_id) REFERENCES department(Id)
+);
+
+6. create table profile
+(
+  Id BIGINT(20)primary key,
+  address varchar(255) NOT NULL,
+  batch varchar(255) NOT NULL,
+  degree_id BIGINT(20) NOT NULL,
+  designation varchar(255) NULL,
+  gender varchar(255) NOT NULL,
+  FOREIGN KEY(degree_id) REFERENCES degree(Id)
+);
+
+7. create table higher_degree
+(
+  Id BIGINT(20)primary key,
+  degree_name varchar(255) NULL,
+  university_name varchar(255) NULL,
+  profile_id BIGINT(20) NOT NULL,
+  FOREIGN KEY(profile_id) REFERENCES profile(Id)
+);
+
+8. create table experience
+(
+  Id BIGINT(20)primary key,
+  company_name varchar(255) NOT NULL,
+  current BIT(1) NOT NULL,
+  end DATETIME NULL,
+  start DATETIME NOT NULL,
+  profile_id BIGINT(20) NOT NULL,
+  FOREIGN KEY(profile_id) REFERENCES profile(Id)
+);
+
+
+9. create table project
+(
+  Id BIGINT(20)primary key,
+  name varchar(255) NOT NULL,
+  number_of_members INT(11) NOT NULL,
+  profile_id BIGINT(20) NOT NULL,
+  short_description varchar(255) NULL,
+  FOREIGN KEY(profile_id) REFERENCES profile(Id)
+);
+
+10.create table profile_skills
+(
+  skill_id BIGINT(20),
+  profile_id BIGINT(20),
+  PRIMARY KEY(skill_id,profile_id)
+);
+
+11. create table user
+(
+  Id BIGINT(20) primary key,
+  emailid varchar(255) NOT NULL,
+  name varchar(255) NOT NULL,
+  password varchar(255) NOT NULL,
+  phonenumber varchar(255) NOT NULL,
+  profile_id BIGINT(20) NULL,
+  role_id BIGINT(20) NOT NULL,
+  username varchar(255) NOT NULL,
+  FOREIGN KEY(profile_id) REFERENCES profile(Id),
+  FOREIGN KEY(role_id) REFERENCES role(Id)
+);
+
+12. create table query
+(
+  Id BIGINT(20)primary key,
+  content varchar(255) NOT NULL,
+  date DATETIME NOT NULL,
+  parent_id BIGINT(20) NULL,
+  user_id BIGINT(20)NOT NULL,
+  FOREIGN KEY(parent_id) REFERENCES query(Id),
+  FOREIGN KEY(user_id) REFERENCES user(Id)
+);
+
+13. create table event
+(
+  Id BIGINT(20)primary key,
+  date DATETIME NOT NULL,
+  description varchar(255) NULL,
+  invitation varchar(255) NOT NULL,
+  name varchar(255) NOT NULL,
+  organiser_id BIGINT(20)NOT NULL,
+  FOREIGN KEY(organiser_id) REFERENCES user(Id)
+);
+
+14. create table post
+(
+  Id BIGINT(20)primary key,
+  content varchar(255) NOT NULL,
+  date DATETIME NOT NULL,
+  type_id BIGINT(20) NOT NULL,
+  user_id BIGINT(20)NOT NULL,
+  FOREIGN KEY(type_id) REFERENCES post_type(Id),
+  FOREIGN KEY(user_id) REFERENCES user(Id)
+);
+
+15. alter table role add description varchar(255);
+
+16. alter table role modify column description varchar(500);
+
+17. alter table role drop column description;
+
+18. alter table role rename roles;
+
+19. alter table roles rename role;
+
+20. alter table department add user_id BIGINT(20);
+
+21. ALTER TABLE department ADD FOREIGN KEY(user_id) REFERENCES user(Id);
+
+22. alter table department drop column user_id;
+
+23. alter table department rename departments;
+
+24. drop table profile_skills;
+
+25. drop table post;
