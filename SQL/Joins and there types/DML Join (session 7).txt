@@ -1,0 +1,267 @@
+1) select role.*,user.* from role
+Inner join user
+on role.id=user.role_id
+order by role.name asc, user.name asc;
+
+2)select role.*,user.* from role
+left join user
+on role.id=user.role_id
+order by role.name asc, user.name asc;
+
+3)select user.name,role.name from user 
+inner join role
+on user.role_id=role.id
+order by user.name asc;
+
+4)select user.phonenumber,user.emailid,profile.batch,department.name,profile.designation,experience.company_name from user
+join profile
+on user.profile_id=profile.id
+join degree
+on profile.degree_id=degree.id
+join department
+on degree.department_id=department.id
+join experience
+on profile.id=experience.profile_id
+where user.name='Ram' and experience.current=1;
+
+5)select user.name,skill.name from user
+join role
+on user.role_id=role.id
+join profile
+on user.profile_id=profile.id
+join profile_skills
+on profile.id=profile_skills.profile_id
+join skill
+on profile_skills.skill_id=skill.id
+where role.name='Alumni'
+order by user.name,skill.name;
+
+
+6)select user.name,experience.company_name from user
+join role
+on user.role_id=role.id
+join profile
+on user.profile_id=profile.id
+join experience
+on profile.id=experience.profile_id
+where role.name='Alumni'
+order by user.name,experience.company_name;
+
+7)select user.name,experience.company_name from user
+left join role
+on user.role_id=role.id
+left join profile
+on user.profile_id=profile.id
+left join experience
+on profile.id=experience.profile_id
+where role.name='Alumni' 
+order by user.name,experience.company_name;
+
+8)select user.name,experience.company_name from user
+join role
+on user.role_id=role.id
+join profile                             
+on user.profile_id=profile.id
+join experience
+on profile.id=experience.profile_id
+where role.name='Alumni' and experience.current=1
+order by user.name
+
+9)select user.name,experience.company_name from user
+join role
+on user.role_id=role.id
+join profile
+on user.profile_id=profile.id
+join experience
+on profile.id=experience.profile_id
+where role.name='Alumni' and experience.current=1 and profile.batch='2008'
+order by user.name
+
+10)select user.name,user.emailid,user.phonenumber,profile.address from user
+join role
+on user.role_id=role.id
+join profile
+on user.profile_id=profile.id
+where role.name='Alumni' and user.profile_id is not null
+order by user.name
+
+11)select user.name,user.emailid,user.phonenumber,profile.address from user
+join role
+on user.role_id=role.id
+join profile
+on user.profile_id=profile.id
+where role.name='Alumni' and profile.batch='2008'
+order by user.name
+ 
+12)select user.name,user.emailid,user.phonenumber,profile.address from user
+join role
+on user.role_id=role.id
+join profile
+on user.profile_id=profile.id
+join degree
+on profile.degree_id=degree.id
+where role.name='Alumni' and degree.name='BSC_CT'
+order by user.name
+
+13)select user.name,user.emailid,user.phonenumber,profile.address from user
+join role
+on user.role_id=role.id
+join profile
+on user.profile_id=profile.id
+join degree
+on profile.degree_id=degree.id
+join department
+on degree.department_id=department.id
+where role.name='Alumni' and department.name='CSE'
+order by user.name
+
+14)select user.name,higher_degree.university_name from user
+inner join role
+on user.role_id=role.id
+inner join profile
+on user.profile_id=profile.id
+inner join higher_degree
+on profile.id=higher_degree.profile_id
+where role.name='Alumni' and higher_degree.degree_name is not null
+group by user.name,higher_degree.university_name ;
+
+15)select user.name,higher_degree.university_name from user
+inner join role
+on user.role_id=role.id
+inner join profile
+on user.profile_id=profile.id
+inner join higher_degree
+on profile.id=higher_degree.profile_id
+inner join degree
+on profile.degree_id=degree.id
+join department
+on degree.department_id=department.id
+where role.name='Alumni' and department.name='CSE' and higher_degree.degree_name is not null
+group by user.name,higher_degree.university_name ;
+
+16)select user.name,user.emailid,user.phonenumber,profile.address from user
+join role
+on user.role_id=role.id
+join profile
+on user.profile_id=profile.id
+join degree
+on profile.degree_id=degree.id
+join department
+on degree.department_id=department.id
+inner join higher_degree
+on profile.id=higher_degree.profile_id
+where role.name='Alumni' and higher_degree.university_name='Texas University'
+order by user.name
+
+17)select user.name,profile.batch from user
+join role
+on user.role_id=role.id
+join profile
+on user.profile_id=profile.id
+where role.name='Alumni' and profile.gender='female'
+order by user.name
+
+18)select user.name,profile.batch,degree.name from user
+join role
+on user.role_id=role.id
+join profile
+on user.profile_id=profile.id
+join degree
+on profile.degree_id=degree.id
+where role.name='Alumni' and profile.gender='female'
+order by user.name
+
+19)select user.name,profile.batch,degree.name,department.name from user
+join role
+on user.role_id=role.id
+join profile
+on user.profile_id=profile.id
+join degree
+on profile.degree_id=degree.id
+join department
+on degree.department_id=department.id
+where role.name='Alumni' and profile.gender='female'
+order by user.name
+
+20)select degree.name,department.name from degree
+inner join department 
+on degree.department_id=department.id
+order by degree.name;
+
+21)select user.name,profile.designation from user
+join role
+on user.role_id=role.id
+join profile
+on user.profile_id=profile.id
+where role.name='Alumni' and profile.gender='male'
+order by user.name
+
+22)select user.name,profile.designation from user
+join role
+on user.role_id=role.id
+join profile
+on user.profile_id=profile.id
+join experience
+on profile.id=experience.profile_id
+where role.name='Alumni' and experience.current=1 and experience.company_name='TCS'
+order by user.name
+
+
+23)select user.name,query.content from user
+inner join query
+on user.id=query.user_id
+order by name,date(date);
+
+24)select user.name,query.content from user
+inner join query
+on user.id=query.user_id
+where parent_id is not null
+order by name,date(date);
+
+25)select user.name,post.content from user
+inner join post
+on user.id=post.user_id
+order by user.name,date(date);
+
+26)select user.name,post.content from user
+inner join post
+on user.id=post.user_id
+inner join post_type
+on post.type_id=post_type.id
+where post_type.name='Technology'
+order by user.name,post.date;
+
+27)select user.name,post.content from user
+inner join post
+on user.id=post.user_id
+where year(post.date)='2013'
+order by user.name,post.date,post.content;
+
+28)select user.name,department.name from user
+join role
+on user.role_id=role.id
+join profile
+on user.profile_id=profile.id
+join degree
+on profile.degree_id=degree.id
+join department
+on degree.department_id=department.id
+join profile_skills
+on profile.id=profile_skills.profile_id
+join skill
+on profile_skills.skill_id=skill.id
+where skill.name='Programming'
+order by user.name
+
+29)select user.name,event.name from user
+inner join event
+on user.id=event.organiser_id
+order by user.name,event.date;
+
+30)select user.name,event.name from user
+inner join event
+on user.id=event.organiser_id
+join role
+on user.role_id=role.id
+where role.name='Alumni'
+order by user.name,event.date;
