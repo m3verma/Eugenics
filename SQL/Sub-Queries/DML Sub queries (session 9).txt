@@ -1,0 +1,75 @@
+1)select user.name from user,role where role.id=user.role_id and role.name='admin' order by user.name asc;
+
+2)select user.name from user,role where role.id=user.role_id and role.name='alumni' order by user.name desc;
+
+3)select degree.name from degree,department where degree.department_id=department.id and department.name='CSE' order by degree.name asc;
+
+4)select department.name from degree,department where degree.department_id=department.id and degree.name='BSC_CT';
+
+5)select user.name from user,role,profile where role.id=user.role_id and user.profile_id=profile.id and role.name='alumni' and
+profile.gender='female' order by user.name asc;
+
+6)select department.name from user,degree,department,profile where profile.degree_id=degree.id and  degree.department_id=department.id
+and user.profile_id=profile.id and user.name='Ram'
+
+7)select higher_degree.university_name from user,higher_degree,profile where profile.id=higher_degree.profile_id 
+and user.profile_id=profile.id and user.name='Ram'
+
+8)select profile.designation from user,profile where user.profile_id=profile.id and user.name='Ram';
+
+9)select skill.name from user,profile,profile_skills,skill where user.profile_id=profile.id and profile_skills.profile_id=profile.id
+and profile_skills.skill_id=skill.id and user.name='ram' order by skill.name asc
+
+10)select e.company_name,e.start,e.end from user as u,profile as p,experience as e where u.profile_id=p.id and e.profile_id=p.id and u.name='Anithaa'
+order by e.start
+
+11)select pj.name from user as u,profile as p,project as pj where u.profile_id=p.id and pj.profile_id=p.id and u.name='Ram'
+order by pj.name
+
+12)select query.content from user,query where query.user_id=user.id and user.name='Ram'
+order by query.date
+
+13)select post.content from user,post where post.user_id=user.id and user.name='Ram'
+order by post.date
+
+14)select post.content from user,post,post_type where post.user_id=user.id and post.type_id=post_type.id and user.name='Ram' 
+and post_type.name='Technology'
+order by post.date
+
+15)select post.content from user,post where post.user_id=user.id and user.name='RAM' and year(post.date)='2012'
+order by post.date;
+
+16)select u.name,u.phonenumber from user as u,role,profile where u.profile_id=profile.id and u.role_id=role.id and profile.batch=2008 
+and role.name='Alumni'
+order by u.name asc;
+
+17)select u.name from user as u,role,profile where u.profile_id=profile.id  and u.role_id=role.id and profile.batch=2008 
+and role.name='Alumni' and profile.gender='male'
+order by u.name asc;
+
+18)select u.name from user as u,role,profile,degree where u.profile_id=profile.id  and u.role_id=role.id
+and profile.degree_id=degree.id and degree.name ='BSC_CT'and profile.batch=2008 
+and role.name='Alumni' and profile.gender='male'
+order by u.name asc;
+
+19)select u.name from user as u,role,profile,degree,department where u.profile_id=profile.id  and u.role_id=role.id
+and profile.degree_id=degree.id and degree.department_id=department.id and department.name ='CSE'and profile.batch=2008 
+and role.name='Alumni' 
+order by u.name asc;
+
+20)select user.name,user.emailid from user,profile where user.profile_id=profile.id and profile.batch=2008 order by user.name;
+
+21)select user.name from user,profile,profile_skills, skill where user.profile_id=profile.id and profile_skills.profile_id=profile.id 
+and profile_skills.skill_id=skill.id and skill.name='Web Design' order by user.name;
+
+22)select user.name from user,profile,experience where user.profile_id=profile.id and experience.profile_id=profile.id
+and experience.company_name='TCS' order by user.name;
+
+23)select user.name,user.emailid from user,role,profile,experience where user.profile_id=profile.id and user.role_id=role.id
+and experience.profile_id=profile.id
+and role.name='alumni' and experience.company_name='TCS' and experience.current='1' order by user.name;
+
+24)select user.name,role.name from user,role where user.role_id=role.id order by user.name asc;
+
+25)select user.name,role.name from user,role,profile where user.role_id=role.id and user.profile_id=profile.id and profile.id is not null order
+by user.name asc;

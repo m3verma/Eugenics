@@ -1,0 +1,87 @@
+1. select role.name,count(*) as role_count from user inner join role on user.role_id=role.id where user.role_id is not null group by user.role_id order by role.name;
+
+2. SELECT r.name, COUNT(u.id) as role_count FROM role as r LEFT OUTER JOIN user as u ON u.role_id = r.id GROUP BY r.name
+ORDER BY r.name;
+
+3. SELECT u.name, (SELECT COUNT(*) FROM role as r, profile as p, experience as e WHERE u.role_id = r.id AND r.name =
+'Alumni' AND u.profile_id = p.id AND p.id = e.profile_id) company_count FROM user u,role r WHERE u.role_id = r.id AND
+r.name = 'Alumni' GROUP BY u.name ORDER BY u.name;
+
+4. SELECT u.name FROM role as r, profile as p, user as u, experience as e WHERE u.role_id = r.id AND r.name = 'Alumni' AND
+u.profile_id = p.id AND p.id = e.profile_id GROUP BY u.name ORDER BY COUNT(e.profile_id) DESC LIMIT 1;
+
+5. SELECT u.name, (SELECT COUNT(*) FROM role as r, profile as p, profile_skills as ps, skill as s WHERE u.role_id = r.id
+AND r.name = 'Alumni' AND u.profile_id = p.id AND p.id = ps.profile_id AND ps.skill_id = s.id) skill_count FROM user
+u,role r WHERE u.role_id = r.id AND r.name = 'Alumni' GROUP BY u.name ORDER BY u.name;
+
+6. SELECT u.name FROM user as u, role as r, profile as p, profile_skills as ps, skill as s WHERE u.role_id = r.id AND
+r.name = 'Alumni' AND u.profile_id = p.id AND p.id = ps.profile_id AND ps.skill_id = s.id GROUP BY u.name HAVING count(*)
+>3 ORDER BY u.name;
+
+7. SELECT dm.name, COUNT(*) as degree_count FROM degree as d, department as dm WHERE d.department_id = dm.id GROUP BY
+dm.name HAVING COUNT(*) >=1 ORDER BY dm.name;
+
+8. SELECT dm.name, COUNT(d.id) as degree_count FROM department as dm LEFT OUTER JOIN degree as d ON d.department_id =
+dm.id GROUP BY dm.name ORDER BY dm.name;
+
+9. SELECT dm.name FROM department as dm, degree as d WHERE d.department_id = dm.id GROUP BY dm.name HAVING COUNT(d.id) = 3
+ORDER BY dm.name ;
+
+10. SELECT dm.name, COUNT(u.id) as alumni_count FROM department as dm, degree as d, profile as p, user as u, role as r
+WHERE u.role_id = r.id AND r.name = 'Alumni' AND u.profile_id = p.id AND p.degree_id = d.id AND d.department_id = dm.id
+GROUP BY dm.name HAVING COUNT(u.id) >= 1 ORDER BY dm.name;
+
+11. SELECT dm.name, COUNT(u.id) as alumni_count FROM department as dm, degree as d, profile as p, user as u, role as r
+WHERE u.role_id = r.id AND r.name = 'Alumni' AND u.profile_id = p.id AND p.degree_id = d.id AND d.department_id = dm.id
+GROUP BY dm.name HAVING COUNT(u.id) >= 3 ORDER BY dm.name;
+
+12. SELECT pt.name, COUNT(p.id) as post_count FROM post as p, post_type as pt WHERE pt.id = p.type_id GROUP BY pt.id
+HAVING COUNT(p.id) >= 1 ORDER BY pt.name;
+
+13. SELECT u.name, COUNT(p.id) as post_count FROM user as u, post as p WHERE u.id = p.user_id GROUP BY u.name HAVING
+COUNT(p.id) >= 1 ORDER BY u.name;
+
+14. SELECT u.name, COUNT(p.id) as post_count FROM user as u LEFT OUTER JOIN post as p ON u.id = p.user_id GROUP BY u.name
+ORDER BY u.name;
+
+15. SELECT u.name FROM user as u, post as p WHERE u.id = p.user_id GROUP BY u.name HAVING COUNT(p.id) = 4 ORDER BY u.name;
+
+16.SELECT u.name
+FROM user as u,post as p,profile as pf,role as r
+WHERE u.role_id=r.id AND r.name='Alumni' AND p.user_id=u.id AND u.profile_id=pf.id AND pf.batch='2008'
+GROUP BY u.name
+HAVING COUNT(p.id)>=3
+ORDER BY u.name;
+
+17. SELECT u.name FROM user as u, profile as p, post as ps, degree as d, department as dm,role as r WHERE u.role_id = r.id
+AND r.name = 'Alumni' AND u.profile_id = p.id AND p.batch = '2008' AND p.degree_id = d.id AND d.department_id = dm.id AND
+dm.name = 'CSE' AND u.id = ps.user_id GROUP BY u.id HAVING COUNT(ps.user_id)>= 3 ORDER BY u.name;
+
+18. SELECT u.name FROM user as u, event as e WHERE u.id = e.organiser_id GROUP BY u.name HAVING COUNT(e.organiser_id) = 5
+ORDER BY u.name;
+
+19. SELECT u.name, COUNT(e.organiser_id) as event_count FROM user as u, event as e WHERE u.id = e.organiser_id GROUP BY
+u.name HAVING COUNT(e.organiser_id) >= 1 ORDER BY u.name;
+
+20.SELECT u.name, COUNT(e.organiser_id) as event_count FROM user as u LEFT OUTER JOIN event as e ON u.id = e.organiser_id
+GROUP BY u.name ORDER BY u.name;
+
+21. SELECT p.batch, COUNT(e.profile_id) as TCS_count FROM profile as p, experience as e WHERE p.id = e.profile_id AND
+e.company_name = 'TCS' GROUP BY p.batch HAVING COUNT(e.profile_id) >= 1 ORDER BY p.batch;
+
+22. SELECT u.name FROM user as u, query as q WHERE u.id = q.user_id GROUP BY u.name HAVING COUNT(q.user_id) = 6 ORDER BY
+u.name;
+
+23. SELECT u.name FROM user as u, query as q WHERE u.id = q.user_id GROUP BY u.name HAVING COUNT(q.user_id) = 2 ORDER BY 
+u.name;
+
+24. SELECT u.name, p.batch FROM user as u, query as q, profile as p WHERE u.id = q.user_id AND u.profile_id = p.id GROUP BY u.name HAVING COUNT(q.user_id) = 6 ORDER BY u.name;
+
+25. select user_name, dept_name from 
+(select name as user_name, profile_id,id from user) as u join profile on u.profile_id=profile.id
+join degree on profile.degree_id=degree.id
+join (select name as dept_name,id from department)as d on d.id=degree.department_id
+join query on query.user_id=u.id
+group by user_name
+having count(query.content)=6
+order by user_name;
