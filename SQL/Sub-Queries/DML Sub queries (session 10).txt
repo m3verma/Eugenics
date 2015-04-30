@@ -1,0 +1,49 @@
+1)select name from user where profile_id in (select profile_id from higher_degree where university_name='Texas University')order by name;
+
+2)select name from user where profile_id in (select profile_id from higher_degree where university_name='Texas University')and profile_id in (select id from profile where batch=2008)order by name;
+
+3)select name from user where profile_id in (select profile_id from higher_degree where university_name='Texas University')and profile_id in (select id from profile where batch=2008 and degree_id in (select id from degree where department_id in (select id from department where name='CSE')))order by name;
+
+4)select name from user where profile_id in (select profile_id from profile_skills where profile_id in (select id from profile where degree_id in (select id from degree where department_id in (select id from department where name='MECH'))) and skill_id in (select id from skill where name='Programming'))order by name;
+
+5)select name from user where profile_id in (select profile_id from experience where profile_id in (select id from profile where degree_id in (select id from degree where department_id in (select id from department where name='MECH'))) and company_name='TCS' and current=1)order by name;
+
+6)select name from user where profile_id in (select profile_id from project where number_of_members>10) order by name;
+
+7)select name from user where profile_id in (select id from profile where batch=2008) and id in (select user_id from query ) order by name;
+
+8)select name from user where id in (select user_id from query where parent_id is null) order by name;
+
+9)select name from user where id in (select user_id from query where parent_id is not null) order by name;
+
+10)select name from user where id in (select user_id from query where parent_id is null ) and profile_id in (select id from profile where batch=2008) order by name;
+
+11)select name from user where id in (select user_id from query where parent_id is not null) and profile_id in (select id from profile where batch=2008) order by name;
+
+12)select name from user where id in (select organiser_id from event) order by name;
+
+13)select name from user where id in (select organiser_id from event) and role_id in (select id from role where name='Alumni') order by name;
+
+14)select name from user where id in (select organiser_id from event where year(date)='2013') order by name;
+
+15)select name,phonenumber,emailid from user where id in (select organiser_id from event where name='ICSIP 2008');
+
+16)select name from user where id in (select user_id from post where type_id in (select id from post_type where name='Technology') and year(date)='2013') order by name;
+
+17)select name from user where profile_id in (select profile_id from experience where profile_id in (select id from profile where designation='Project Manager') and company_name='TCS' and current=1) order by name;
+
+18)SELECT name FROM user WHERE profile_id IN (SELECT profile_id FROM higher_degree WHERE university_name IS NOT NULL) ORDER BY name
+
+19)select name from user where profile_id in (select profile_id from experience where company_name='TCS' and ((year(end)>='2012' and year(start)<='2012') or  end is null)) order by name;
+
+20)select count(id)event_count from event where organiser_id in (select id from user where role_id in (select id from role where name='Alumni'));
+
+21)select count(id)degree_count from degree where department_id in (select id from department where name='CSE');
+
+22)select count(id)coordinator_count from user where role_id in (select id from role where name='ALUMNI COORDINATOR');
+
+23)select count(id)cse_alumni_count from user where role_id in (select id from role where name='Alumni') and profile_id in (select id from profile where degree_id in (select id from degree where department_id in (select id from department where name='CSE')));
+
+24)select name from user where id not in (select user_id from query ) and role_id in (select id from role where name='Alumni')order by name;
+
+25)select name from user where profile_id in (select profile_id from project where number_of_members=(select min(number_of_members) from project))order by name;

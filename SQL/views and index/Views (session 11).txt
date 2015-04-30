@@ -1,0 +1,58 @@
+1)create or replace view view_alumni_details as 
+select u.name as user_name,d.name as degree_name ,p.batch,u.phonenumber,u.emailid from user u,degree d,profile p,role r
+where r.id=u.role_id and u.profile_id=p.id and d.id=p.degree_id and r.name='Alumni'
+order by u.name;
+
+2)create or replace view view_degree_details as 
+select d.name as degree_name,dt.name as dept_name from degree d,department dt
+where d.department_id=dt.id
+order by d.name;
+
+3)create or replace view view_experience_details as
+select user.name as user_name,experience.company_name as company_name from role
+join user on user.role_id=role.id
+left outer join profile on profile.id=user.profile_id
+join experience on experience.profile_id=profile.id
+and role.name='Alumni' 
+order by user.name,experience.company_name;
+
+4)create or replace view view_BSC_CT_details as
+select user.name,user.emailid,user.phonenumber from role
+join user on user.role_id=role.id
+join profile on profile.id=user.profile_id
+join degree on degree.id=profile.degree_id
+where degree.name='BSC_CT' and role.name='Alumni'
+order by user.name;
+
+5)create or replace view view_female_alumni_details as 
+select user.name as user_name,profile.batch,degree.name as degree_name from role
+join user on role.id=user.role_id
+join profile on profile.id=user.profile_id
+join degree on degree.id=profile.degree_id
+where profile.gender='Female' and role.name='Alumni'
+order by user.name;
+
+6)create or replace view view_TCS_alumni_details as
+select user.name,user.emailid,profile.designation from user
+join role on role.id=user.role_id
+join profile on profile.id=user.profile_id
+join experience on experience.profile_id=profile.id
+where role.name='Alumni' and experience.company_name='TCS' and experience.current=1
+order by user.name;
+
+7)create or replace view view_event_details as 
+select user.name as user_name,event.name as event_name from user
+join event on user.id=event.organiser_id
+order by event.date;
+
+8)create or replace view view_TCS_batchwise_count_details as
+SELECT p.batch, COUNT(e.profile_id) as TCS_count FROM profile as p, experience as e WHERE p.id = e.profile_id AND
+e.company_name = 'TCS' GROUP BY p.batch HAVING COUNT(e.profile_id) >= 1 ORDER BY p.batch;
+
+9)create or replace view view_event_count_details as
+SELECT u.name, COUNT(e.organiser_id) as event_count FROM user as u, event as e WHERE u.id = e.organiser_id GROUP BY
+u.name HAVING COUNT(e.organiser_id) >= 1 ORDER BY u.name;
+
+10)CREATE OR REPLACE view view_skillset_count_details as
+select u.name ,(select count(*) from user us,profile_skills ps where us.profile_id=ps.profile_id and us.name=u.name) as skill_count
+from user u,role r where r.name='Alumni' and r.id=u.role_id group by u.name order by u.name;
