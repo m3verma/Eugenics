@@ -229,7 +229,7 @@ on user.id=post.user_id
 inner join post_type
 on post.type_id=post_type.id
 where post_type.name='Technology'
-order by user.name,post.date;
+order by user.name,post.date,post.content;
 
 27)select user.name,post.content from user
 inner join post
